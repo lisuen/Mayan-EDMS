@@ -30,8 +30,8 @@ from ..models import (
 from ..tasks import task_source_handle_upload
 from ..utils import get_upload_form_class
 
-import shutil
-from ..ocr import ocrFile
+# import shutil
+# from ..ocr import ocrFile
 from django.http import HttpResponse
 
 __all__ = ('UploadBaseView', 'UploadInteractiveView')
@@ -271,17 +271,17 @@ class UploadInteractiveView(UploadBaseView):
 
                 ocr_result = forms['document_form'].cleaned_data.get('description')
 
-                if '.png' in str(shared_uploaded_file) or '.jpg' in str(shared_uploaded_file):
-
-                    with shared_uploaded_file.open() as file_object:
-                        file_path = str(file_object)
-                        temp_path = 'temp/temp.png'
-                        print('start copy file.........')
-                        shutil.copy(file_path, temp_path)
-                        print('start ocr.........')
-                        ocr_result = ocrFile(temp_path)
-                        # print(ocr_result)
-                        print('ocr done......')
+                # if '.png' in str(shared_uploaded_file) or '.jpg' in str(shared_uploaded_file):
+                #
+                #     with shared_uploaded_file.open() as file_object:
+                #         file_path = str(file_object)
+                #         temp_path = 'temp/temp.png'
+                #         print('start copy file.........')
+                #         shutil.copy(file_path, temp_path)
+                #         print('start ocr.........')
+                #         ocr_result = ocrFile(temp_path)
+                #         # print(ocr_result)
+                #         print('ocr done......')
 
                 task_source_handle_upload.apply_async(
                     kwargs={

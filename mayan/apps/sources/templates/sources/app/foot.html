@@ -2,6 +2,7 @@
 {% load static %}
 
 <script src="{% static 'sources/node_modules/dropzone/dist/dropzone.js' %}" type="text/javascript"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 <script type="text/x-template" id="previewTemplate">
     <div class="dz-preview dz-file-preview" style="text-align: center">
@@ -94,7 +95,7 @@
             {#processData: false,#}
             {#contentType: false,#}
             beforeSend: function (xhr, setting) {
-                xhr.setRequestHeader("X-CSRFToken", "7ssFqZyGwamI6g4MAs18SLhvN2wseTckQTQmd7ItfgMo2uxTwAFx5IdSuTxmIZkd")
+                xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'))
             },
             success: function (data) {
                 {#console.log(data);#}
