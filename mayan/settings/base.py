@@ -19,9 +19,17 @@ setting_namespace = SettingNamespaceSingleton(global_symbol_table=globals())
 if 'revertsettings' in sys.argv:
     setting_namespace.update_globals(only_critical=True)
     DATABASES = {
+        # 'default': {
+        #     'ENGINE': 'django.db.backends.sqlite3',
+        #     'NAME': os.path.join(MEDIA_ROOT, 'db.sqlite3')  # NOQA: F821
+        # }
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(MEDIA_ROOT, 'db.sqlite3')  # NOQA: F821
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'mayan',
+            'USER': 'root',
+            'PASSWORD': '123456',
+            'HOST': '121.41.55.174',
+            'PORT': '3306'
         }
     }
 else:
@@ -197,9 +205,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 

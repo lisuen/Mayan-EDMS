@@ -71,7 +71,9 @@ def ocrFile(file_path):
     # img = cv2.imdecode(np.fromfile(file, dtype=np.uint8), -1)
     # 读取图像
     # result = reader.readtext(file_path, canvas_size=4096)
-    result = reader.readtext(file_path, canvas_size=968)
+    result = reader.readtext(file_path, canvas_size=1080)
+    print(result)
+
 
     word_list = []
     position_list = []
