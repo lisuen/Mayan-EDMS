@@ -19,17 +19,9 @@ setting_namespace = SettingNamespaceSingleton(global_symbol_table=globals())
 if 'revertsettings' in sys.argv:
     setting_namespace.update_globals(only_critical=True)
     DATABASES = {
-        # 'default': {
-        #     'ENGINE': 'django.db.backends.sqlite3',
-        #     'NAME': os.path.join(MEDIA_ROOT, 'db.sqlite3')  # NOQA: F821
-        # }
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'mayan',
-            'USER': 'root',
-            'PASSWORD': '123456',
-            'HOST': '121.41.55.174',
-            'PORT': '3306'
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(MEDIA_ROOT, 'db.sqlite3')  # NOQA: F821
         }
     }
 else:

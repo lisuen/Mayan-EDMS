@@ -190,28 +190,28 @@ def task_upload_document(self, source_id, document_type_id, shared_uploaded_file
         else:
             user = None
 
-        if '.png' in str(shared_upload) or '.jpg' in str(shared_upload):
-            with shared_upload.open() as file_object:
-                file_path = str(file_object)
-                temp_path = 'temp/temp.png'
-                print('start copy file.........')
-                shutil.copy(file_path, temp_path)
-                print('start ocr.........')
-                ocr_result = ocrFile(temp_path)
-                # print(ocr_result)
-                print('ocr done......')
-                source.upload_document(
-                    file_object=file_object, document_type=document_type,
-                    description=ocr_result, label=label, language=language,
-                    querystring=querystring, user=user,
-                )
-        else:
-            with shared_upload.open() as file_object:
-                source.upload_document(
-                    file_object=file_object, document_type=document_type,
-                    description=description, label=label, language=language,
-                    querystring=querystring, user=user,
-                )
+        # if '.png' in str(shared_upload) or '.jpg' in str(shared_upload):
+        #     with shared_upload.open() as file_object:
+        #         file_path = str(file_object)
+        #         temp_path = 'temp/temp.png'
+        #         print('start copy file.........')
+        #         shutil.copy(file_path, temp_path)
+        #         print('start ocr.........')
+        #         ocr_result = ocrFile(temp_path)
+        #         # print(ocr_result)
+        #         print('ocr done......')
+        #         source.upload_document(
+        #             file_object=file_object, document_type=document_type,
+        #             description=ocr_result, label=label, language=language,
+        #             querystring=querystring, user=user,
+        #         )
+        # else:
+        with shared_upload.open() as file_object:
+            source.upload_document(
+                file_object=file_object, document_type=document_type,
+                description=description, label=label, language=language,
+                querystring=querystring, user=user,
+            )
 
     except OperationalError as exception:
         logger.warning(
