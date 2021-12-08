@@ -9,6 +9,8 @@ from mayan.apps.smart_settings.utils import SettingNamespaceSingleton
 from .literals import DEFAULT_SECRET_KEY, SECRET_KEY_FILENAME, SYSTEM_DIR
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+DEBUG = False
+ALLOWED_HOSTS = ['*']
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -246,9 +248,12 @@ LANGUAGES = (
 
 SITE_ID = 1
 
-STATIC_ROOT = os.environ.get(
-    'MAYAN_STATIC_ROOT', os.path.join(MEDIA_ROOT, 'static')  # NOQA: F821
-)
+# STATIC_ROOT = os.environ.get(
+#     'MAYAN_STATIC_ROOT', os.path.join(MEDIA_ROOT, 'static')  # NOQA: F821
+# )
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
