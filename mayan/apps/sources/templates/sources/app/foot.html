@@ -50,14 +50,14 @@
              type: "get",
              url: 'documents/documents/recently/created/',
              success: function (data) {
-
+                 console.log(data);
                  if (data != "") {
                      let index = "<a href=\"/documents/documents/";
                      if (data.search(index) != -1) {
                          let s = data.substr(data.search(index) + index.length);
                          let i = s.search('/');
                          let id = s.substr(0, i);
-                         {#console.log('id:' + id);#}
+                         console.log('id:' + id);
                          $.cookie('last_document_id', id);
                      } else {
                          $.cookie('last_document_id', -1);
@@ -88,6 +88,7 @@
                             let s = data.substr(data.search(index) + index.length);
                             let i = s.search('/');
                             let id = s.substr(0, i);
+                            console.log(id);
                              if (id > $.cookie('last_document_id')) {
                                  clearInterval(timer);
                                 $.ajax({
@@ -120,7 +121,6 @@
     }
 
     function showResult(des, id) {
-         $('.dz-progress').css('display', 'none');
          $('.ocr').css('display', 'block');
          $('#ocr-result').val(des);
          $('#ocr-result').attr('fileId', id);
