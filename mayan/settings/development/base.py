@@ -38,3 +38,16 @@ TEMPLATES[0]['OPTIONS']['loaders'] = (  # NOQA: F405
 )
 
 WSGI_AUTO_RELOAD = True
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mayan',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': '121.41.55.174',
+        'PORT': '3306'
+    }
+}
+
+GUNICORN_TIMEOUT = 60000
