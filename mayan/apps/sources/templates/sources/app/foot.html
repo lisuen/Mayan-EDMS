@@ -50,14 +50,14 @@
              type: "get",
              url: 'documents/documents/recently/created/',
              success: function (data) {
-                 console.log(data);
+                 {#console.log(data);#}
                  if (data != "") {
                      let index = "<a href=\"/documents/documents/";
                      if (data.search(index) != -1) {
                          let s = data.substr(data.search(index) + index.length);
                          let i = s.search('/');
                          let id = s.substr(0, i);
-                         console.log('id:' + id);
+                         {#console.log('id:' + id);#}
                          $.cookie('last_document_id', id);
                      } else {
                          $.cookie('last_document_id', -1);
@@ -88,21 +88,28 @@
                             let s = data.substr(data.search(index) + index.length);
                             let i = s.search('/');
                             let id = s.substr(0, i);
-                            console.log(id);
+                            {#console.log(id);#}
                              if (id > $.cookie('last_document_id')) {
                                  clearInterval(timer);
                                 $.ajax({
                                     type: "get",
                                     url: 'documents/documents/' + id + '/properties/',
                                     success: function (data) {
-                                        {#console.log(data);#}
                                         if (data != "") {
                                             let index = "<label for=\"id_description\">Description:</label>";
                                             if (data.search(index) != -1) {
                                                 let s = data.substr(data.search(index) + index.length);
                                                 let des = $.trim(s.substr(0, s.search("<p")));
-                                                {#console.log(des);#}
+                                                console.log(des);
                                                 showResult(des, id);
+                                            } else {
+                                                index = "<label for=\"id_description\">描述:</label>";
+                                                if (data.search(index) != -1) {
+                                                    let s = data.substr(data.search(index) + index.length);
+                                                    let des = $.trim(s.substr(0, s.search("<p")));
+                                                    console.log(des);
+                                                    showResult(des, id);
+                                                }
                                             }
                                         }
                                     }
@@ -112,7 +119,7 @@
                     }
                 }
             });
-        }, 10000);
+        }, 5000);
 
     }
 
