@@ -20,6 +20,7 @@ from .literals import (
 
 import shutil
 from .ocr import ocrFile
+import fitz
 
 logger = logging.getLogger(name=__name__)
 
@@ -190,7 +191,7 @@ def task_upload_document(self, source_id, document_type_id, shared_uploaded_file
         else:
             user = None
 
-        if '.png' in str(shared_upload) or '.jpg' in str(shared_upload):
+        if '.png' in str(shared_upload) or '.jpg' in str(shared_upload) or '.pdf' in str(shared_upload):
             with shared_upload.open() as file_object:
                 file_path = str(file_object)
                 temp_path = 'temp/temp.png'
@@ -205,25 +206,25 @@ def task_upload_document(self, source_id, document_type_id, shared_uploaded_file
                     description=ocr_result, label=label, language=language,
                     querystring=querystring, user=user,
                 )
-        elif '.pdf' in str(shared_upload):
-            temp_path = 'temp/temp.png'
-            with shared_upload.open() as pdf:
-                for pg in range(0, pdf.pageCount):
-                    page = pdf[pg]
-                    # 设置缩放和旋转系数
-                    trans = fitz.Matrix(zoom_x, zoom_y).preRotate(rotation_angle)
-                    pm = page.getPixmap(matrix=trans, alpha=False)
-                    # 开始写图像
-                    pm.writePNG(temp_path)
-                pdf.close()
-                ocr_result = ocrFile(temp_path)
-                # print(ocr_result)
-                print('ocr done......')
-                source.upload_document(
-                    file_object=pdf, document_type=document_type,
-                    description=ocr_result, label=label, language=language,
-                    querystring=querystring, user=user,
-                )
+        # elif '.pdf' in str(shared_upload):
+        #     temp_path = 'temp/temp.png'
+        #     with shared_upload.open() as pdf:
+        #         for pg in range(0, pdf.pageCount):
+        #             page = pdf[pg]
+        #             # 设置缩放和旋转系数
+        #             trans = fitz.Matrix(zoom_x, zoom_y).preRotate(rotation_angle)
+        #             pm = page.getPixmap(matrix=trans, alpha=False)
+        #             # 开始写图像
+        #             pm.writePNG(temp_path)
+        #         pdf.close()
+        #         ocr_result = ocrFile(temp_path)
+        #         # print(ocr_result)
+        #         print('ocr done......')
+        #         source.upload_document(
+        #             file_object=pdf, document_type=document_type,
+        #             description=ocr_result, label=label, language=language,
+        #             querystring=querystring, user=user,
+        #         )
         else:
             with shared_upload.open() as file_object:
                 source.upload_document(
